@@ -9,4 +9,4 @@ jobs:
     - uses: actions/checkout@v1
     - uses: mikeal/npx@master
         with:
-          args: 'lockfile-lint --type package-lock.json --path  --validate-https --allowed-hosts npm yarn'
+          args: lockfile-lint --path package-lock.json  --validate-https --allowed-hosts npm yarn
