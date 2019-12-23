@@ -8,5 +8,5 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: mikeal/npx@master
-        with:
-          args: lockfile-lint --path package-lock.json  --validate-https --allowed-hosts npm yarn
+      with:
+        args: lockfile-lint --path package-lock.json --validate-https --allowed-hosts npm yarn
