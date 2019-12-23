@@ -1,0 +1,12 @@
+name: lockfile-lint
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: mikeal/npx@master
+        with:
+          args: 'lockfile-lint --type package-lock.json --path  --validate-https --allowed-hosts npm yarn'
