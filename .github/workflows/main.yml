@@ -8,4 +8,4 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Lint that lockfile!
-      uses: jonchurch/lockfile-linter@master
+      uses: jonchurch/lockfile-lint-action@master
