@@ -50,7 +50,8 @@ try {
 
   if (failures.length) {
     const failMessage = failures.flat().join('\n');
-    setFailed(failMessage);
+		setFailed(failMessage);
+		console.log("===FAILURE!!!!!")
   } else {
     console.log('Passed validators');
   }
