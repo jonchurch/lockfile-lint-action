@@ -5,6 +5,6 @@ inputs:
     description: 'Path to the lockfile to lint'
   schemes:
     description: 'URL schemes to allow in addition to http and https'
-  runs:
-    using: 'node12'
-    main: 'src/index.js'
+runs:
+  using: 'node12'
+  main: 'src/index.js'
