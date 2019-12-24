@@ -1,3 +1,4 @@
+name: run local action
 on: [push, pull_request]
 
 jobs:
