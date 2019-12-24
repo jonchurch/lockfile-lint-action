@@ -5,7 +5,7 @@ const {
   ValidateHttps,
   ValidateScheme,
 } = require('lockfile-lint-api');
-const { getInput } = require('@actions/core');
+const { getInput, setFailed } = require('@actions/core');
 
 const lockPath =
   getInput('lockfilePath') || path.resolve(__dirname, '../package-lock.json');
@@ -19,18 +19,6 @@ schemes = defaultSchemes.concat(schemes);
 const parser = new ParseLockfile({ lockfilePath: lockPath });
 
 const lockfile = parser.parseSync();
-
-// const validators = [ValidateHost, ValidateHttps, ValidateScheme];
-// const failures = [];
-
-// validators.forEach(validator => {
-//   const _validator = new validator({ packages: lockfile.object });
-//   const result = _validator.validate();
-
-//   if (result.errors.length) {
-//     failures.push(result.errors);
-//   }
-// });
 
 const hostValidator = new ValidateHost({ packages: lockfile.object });
 const httpsValidator = new ValidateHttps({ packages: lockfile.object });
@@ -53,20 +41,20 @@ function gatherFailures(results) {
   });
   return failures;
 }
-  try {
-    const schemeResults = schemeValidator.validate(schemes);
-    const hostResults = hostValidator.validate(['npm']);
-    const httpsResults = httpsValidator.validate();
+try {
+  const schemeResults = schemeValidator.validate(schemes);
+  const hostResults = hostValidator.validate(['npm']);
+  const httpsResults = httpsValidator.validate();
 
-    const failures = gatherFailures([hostResults, httpsResults, schemeResults]);
+  const failures = gatherFailures([hostResults, httpsResults, schemeResults]);
 
-    if (failures.length) {
-      console.log(failures.flat().join('\n'));
-      process.exit(1);
-    } else {
-      console.log('Passed validators');
-    }
-  } catch (error) {
-    console.log('Something went wrong during validation:', error);
-    process.exit(1);
+  if (failures.length) {
+    const failMessage = failures.flat().join('\n');
+    setFailed(failMessage);
+  } else {
+    console.log('Passed validators');
   }
+} catch (error) {
+  console.log(error);
+  setFailed('Something went wrong during validation');
+}
