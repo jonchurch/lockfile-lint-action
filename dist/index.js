@@ -11613,6 +11613,13 @@ const {
 } = __webpack_require__(854);
 const { getInput, setFailed } = __webpack_require__(470);
 
+////
+//
+//
+//
+//
+console.log(Object.keys(process.env))
+
 const lockPath =
   getInput('lockfilePath') || __webpack_require__.ab + "package-lock.json";
 const defaultSchemes = ['https:', 'http:'];

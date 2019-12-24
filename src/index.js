@@ -7,6 +7,13 @@ const {
 } = require('lockfile-lint-api');
 const { getInput, setFailed } = require('@actions/core');
 
+////
+//
+//
+//
+//
+console.log(Object.keys(process.env))
+
 const lockPath =
   getInput('lockfilePath') || path.resolve(__dirname, '../package-lock.json');
 const defaultSchemes = ['https:', 'http:'];
