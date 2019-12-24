@@ -53,21 +53,23 @@ function gatherFailures(results) {
   });
   return failures;
 }
+function run() {
+  try {
+    const schemeResults = schemeValidator.validate(schemes);
+    const hostResults = hostValidator.validate(['npm']);
+    const httpsResults = httpsValidator.validate();
 
-try {
-  const schemeResults = schemeValidator.validate(schemes);
-  const hostResults = hostValidator.validate(['npm']);
-  const httpsResults = httpsValidator.validate();
+    const failures = gatherFailures([hostResults, httpsResults, schemeResults]);
 
-  const failures = gatherFailures([hostResults, httpsResults, schemeResults]);
-
-  if (failures.length) {
-    console.log(failures.flat().join('\n'));
+    if (failures.length) {
+      console.log(failures.flat().join('\n'));
+      process.exit(1);
+    } else {
+      console.log('Passed validators');
+    }
+  } catch (error) {
+    console.log('Something went wrong during validation:', error);
     process.exit(1);
-  } else {
-    console.log('Passed validators');
   }
-} catch (error) {
-  console.log('Something went wrong during validation:', error);
-  process.exit(1);
 }
+run();
