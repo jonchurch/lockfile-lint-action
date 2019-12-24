@@ -7,12 +7,16 @@ const {
 } = require('lockfile-lint-api');
 const { getInput, setFailed } = require('@actions/core');
 
-////
+// //
 //
 //
 //
 //
-console.log(Object.keys(process.env))
+console.log('DIRNAME:', __dirname);
+console.log(
+  'MAYBE THE RIGHT DIR FOR PACKAGE-LOCK:',
+  path.resolve(__dirname, '../package-lock.json')
+);
 
 const lockPath =
   getInput('lockfilePath') || path.resolve(__dirname, '../package-lock.json');

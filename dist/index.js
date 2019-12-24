@@ -11613,12 +11613,16 @@ const {
 } = __webpack_require__(854);
 const { getInput, setFailed } = __webpack_require__(470);
 
-////
+// //
 //
 //
 //
 //
-console.log(Object.keys(process.env))
+console.log('DIRNAME:', __dirname);
+console.log(
+  'MAYBE THE RIGHT DIR FOR PACKAGE-LOCK:',
+  __webpack_require__.ab + "package-lock.json"
+);
 
 const lockPath =
   getInput('lockfilePath') || __webpack_require__.ab + "package-lock.json";
