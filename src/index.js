@@ -47,7 +47,7 @@ try {
   const httpsResults = httpsValidator.validate();
 
   const failures = gatherFailures([hostResults, httpsResults, schemeResults]);
-
+	console.log({failures})
   if (failures.length) {
     const failMessage = failures.flat().join('\n');
     console.log(`::error ${failMessage}`);
