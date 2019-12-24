@@ -1,0 +1,9 @@
+on: [push, pull_request]
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    name: lockfile lint
+    steps:
+    - name: Lint that lockfile!
+      uses: ./

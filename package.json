@@ -2,7 +2,7 @@
   "name": "lockfile-linter-action",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/jonchurch/lockfile-lint-action#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "@actions/core": "^1.2.0",
+    "lockfile-lint-api": "^5.0.3"
   }
 }
