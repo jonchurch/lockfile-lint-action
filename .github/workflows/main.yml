@@ -7,5 +7,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - run: npm ci
     - name: Lint that lockfile!
-      uses: jonchurch/lockfile-lint-action@master
+      uses: ./
