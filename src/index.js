@@ -7,14 +7,6 @@ const {
 } = require('lockfile-lint-api');
 const { getInput, setFailed } = require('@actions/core');
 
-////////////////////
-//
-//
-//
-//
-//
-setFailed('IMMA ALWAYS FAIL')
-
 const lockPath =
   getInput('lockfilePath') || path.resolve(__dirname, '../package-lock.json');
 const defaultSchemes = ['https:', 'http:'];
@@ -58,12 +50,13 @@ try {
 
   if (failures.length) {
     const failMessage = failures.flat().join('\n');
-		setFailed(failMessage);
-		console.log("===FAILURE!!!!!")
+    console.log(`::error ${failMessage}`);
+    process.exit(1);
   } else {
     console.log('Passed validators');
   }
 } catch (error) {
   console.log(error);
-  setFailed('Something went wrong during validation');
+  console.log('::error Something went wrong during validation');
+  process.exit(1);
 }

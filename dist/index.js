@@ -11613,14 +11613,6 @@ const {
 } = __webpack_require__(854);
 const { getInput, setFailed } = __webpack_require__(470);
 
-////////////////////
-//
-//
-//
-//
-//
-setFailed('IMMA ALWAYS FAIL')
-
 const lockPath =
   getInput('lockfilePath') || __webpack_require__.ab + "package-lock.json";
 const defaultSchemes = ['https:', 'http:'];
@@ -11664,14 +11656,15 @@ try {
 
   if (failures.length) {
     const failMessage = failures.flat().join('\n');
-		setFailed(failMessage);
-		console.log("===FAILURE!!!!!")
+    console.log(`::error ${failMessage}`);
+    process.exit(1);
   } else {
     console.log('Passed validators');
   }
 } catch (error) {
   console.log(error);
-  setFailed('Something went wrong during validation');
+  console.log('::error Something went wrong during validation');
+  process.exit(1);
 }
 
 
