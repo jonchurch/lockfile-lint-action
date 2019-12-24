@@ -47,16 +47,15 @@ try {
   const httpsResults = httpsValidator.validate();
 
   const failures = gatherFailures([hostResults, httpsResults, schemeResults]);
-	console.log({failures})
   if (failures.length) {
     const failMessage = failures.flat().join('\n');
-    console.log(`::error ${failMessage}`);
+    console.log(`##[error]${failMessage}`);
     process.exit(1);
   } else {
     console.log('Passed validators');
   }
 } catch (error) {
   console.log(error);
-  console.log('::error Something went wrong during validation');
+  console.log('##[error]Something went wrong during validation');
   process.exit(1);
 }
