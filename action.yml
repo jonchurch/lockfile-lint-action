@@ -7,4 +7,4 @@ inputs:
     description: 'URL schemes to allow in addition to http and https'
 runs:
   using: 'node12'
-  main: 'src/index.js'
+  main: 'dist/index.js'
