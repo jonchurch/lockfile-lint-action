@@ -11625,8 +11625,13 @@ if (schemes.length) {
 schemes = defaultSchemes.concat(schemes);
 
 const parser = new ParseLockfile({ lockfilePath: lockPath });
-
-const lockfile = parser.parseSync();
+try {
+  const lockfile = parser.parseSync();
+} catch (error) {
+  setFailed(
+    `Could not parse lockfile provided at path ${lockPath}, does that file exist?`
+  );
+}
 
 const hostValidator = new ValidateHost({ packages: lockfile.object });
 const httpsValidator = new ValidateHttps({ packages: lockfile.object });
