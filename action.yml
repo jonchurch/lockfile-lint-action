@@ -3,6 +3,7 @@ description: 'Check a package-lock or yarn.lock file for violations'
 inputs:
   lockfilePath:
     description: 'Path to the lockfile to lint'
+    default: 'package-lock.json'
   schemes:
     description: 'URL schemes to allow in addition to http and https'
   hosts:
