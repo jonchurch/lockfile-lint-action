@@ -11626,7 +11626,8 @@ console.log(
 );
 
 const lockPath =
-  getInput('lockfilePath') || __webpack_require__.ab + "package-lock.json";
+  getInput('lockfilePath') ||
+  path.join(process.env.GITHUB_WORKSPACE, 'package-lock.json');
 const defaultSchemes = ['https:', 'http:'];
 let schemes = getInput('schemes') || [];
 if (schemes.length) {
