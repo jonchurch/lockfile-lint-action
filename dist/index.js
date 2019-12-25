@@ -11614,7 +11614,9 @@ const {
 const { getInput, setFailed } = __webpack_require__(470);
 
 const lockPath =
-  getInput('lockfilePath') || __webpack_require__.ab + "package-lock.json";
+  getInput('lockfilePath') ||
+  path.join(process.env.GITHUB_WORKSPACE, 'package-lock.json');
+
 const defaultSchemes = ['https:', 'http:'];
 let schemes = getInput('schemes') || [];
 if (schemes.length) {
@@ -11647,24 +11649,28 @@ function gatherFailures(results) {
   });
   return failures;
 }
-try {
-  const schemeResults = schemeValidator.validate(schemes);
-  const hostResults = hostValidator.validate(['npm']);
-  const httpsResults = httpsValidator.validate();
 
-  const failures = gatherFailures([hostResults, httpsResults, schemeResults]);
-  if (failures.length) {
-    const failMessage = failures.flat().join('\n');
-    console.log(`##[error]${failMessage}`);
-    process.exit(1);
-  } else {
-    console.log('Passed validators');
+function run() {
+  try {
+    const schemeResults = schemeValidator.validate(schemes);
+    const hostResults = hostValidator.validate(['npm']);
+    const httpsResults = httpsValidator.validate();
+
+    const failures = gatherFailures([hostResults, httpsResults, schemeResults]);
+
+    if (failures.length) {
+      const failMessage = failures.flat().join('\n');
+      setFailed(failMessage);
+    } else {
+      console.log('Passed validators');
+    }
+  } catch (error) {
+    console.log(error);
+    setFailed('Something went wrong during validation');
   }
-} catch (error) {
-  console.log(error);
-  console.log('##[error]Something went wrong during validation');
-  process.exit(1);
 }
+
+run();
 
 
 /***/ }),
