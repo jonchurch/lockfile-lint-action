@@ -11618,6 +11618,7 @@ const { getInput, setFailed } = __webpack_require__(470);
 //
 //
 //
+console.log('GH Worksspace: ', process.env.GITHUB_WORKSPACE);
 console.log('DIRNAME:', __dirname);
 console.log(
   'MAYBE THE RIGHT DIR FOR PACKAGE-LOCK:',

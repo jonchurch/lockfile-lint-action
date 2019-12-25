@@ -12,6 +12,7 @@ const { getInput, setFailed } = require('@actions/core');
 //
 //
 //
+console.log('GH Worksspace: ', process.env.GITHUB_WORKSPACE);
 console.log('DIRNAME:', __dirname);
 console.log(
   'MAYBE THE RIGHT DIR FOR PACKAGE-LOCK:',
