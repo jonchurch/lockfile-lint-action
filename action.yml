@@ -5,6 +5,8 @@ inputs:
     description: 'Path to the lockfile to lint'
   schemes:
     description: 'URL schemes to allow in addition to http and https'
+  hosts:
+    description: 'Whitelisted registry hosts'
 runs:
   using: 'node12'
   main: 'dist/index.js'
